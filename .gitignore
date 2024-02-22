@@ -1,1 +1,3 @@
 *.o
+pingpong
+.DS_Store
