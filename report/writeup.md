@@ -33,7 +33,30 @@ When the number of processing elements is fixed (2 in this case), the main consi
 
 ## Part 2 :  Non-block Ping-Pong
 
- 
+Due to the significant fluctuations in the data with 100 iterations, increasing the iterations to 500 results in a smoother curve and clearer characteristics. The specific results are as follows:
+
+ | Message Size (bytes) | Time (us) | Bandwidth (Megabytes/s) | Latency (us) |
+|----------------------|-----------|-------------------------|--------------|
+| 2                    | 12.346    | 0.324                   | 6.173        |
+| 4                    | 11.749    | 0.681                   | 5.874        |
+| 8                    | 12.355    | 1.295                   | 6.178        |
+| 16                   | 12.395    | 2.582                   | 6.198        |
+| 32                   | 11.161    | 5.734                   | 5.580        |
+| 64                   | 12.658    | 10.112                  | 6.329        |
+| 128                  | 12.529    | 20.433                  | 6.264        |
+| 256                  | 11.389    | 44.955                  | 5.695        |
+| 512                  | 12.692    | 80.682                  | 6.346        |
+| 1024                 | 12.726    | 160.926                 | 6.363        |
+| 2048                 | 14.883    | 275.205                 | 7.442        |
+| 4096                 | 18.485    | 443.172                 | 9.242        |
+
+The graphs of message size versus bandwidth and latency are shown as follows:
+<img src="./part2_1.png" alt="error" width="800"/>
+<img src="./part2_2.png" alt="error" width="800"/>
+
+Compared to the results in Part 1, the bandwidth under the non-blocking ping-pong scenario exhibits a similar upward trend but with a greater magnitude of increase. Due to non-blocking communication not consuming time on blocking issues, the same message size should result in a larger bandwidth.
+
+The latency also exhibits similar changes. The overall latency is significantly reduced, approximately only 1/3 of the results from Part 1. However, the latency still increases rapidly once the message size exceeds 1024 bytes, likely due to the same reason as analyzed earlier, which is the MTU limit.
 
 ## Part 3: MPI Ring Shift
 
