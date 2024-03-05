@@ -60,5 +60,8 @@ The latency also exhibits similar changes. The overall latency is significantly 
 
 ## Part 3: MPI Ring Shift
 
+<img src="./part3_1.png" alt="error" width="800"/>
+<img src="./part3_2.png" alt="error" width="800"/>
+
   
 ## Part 4: Non-blocking MPI Ring Shift
