@@ -22,10 +22,9 @@ int main(int argc, char *argv[]) {
             MPI_Abort(MPI_COMM_WORLD, 1);
         }
 
-        // Initialize messages for sending and receiving
         for (int i = 0; i < msg_size; ++i) {
             send_message[i] = rank;
-            recv_message[i] = 0; // Could be any dummy initialization
+            recv_message[i] = 0; 
         }
 
         double start_time = MPI_Wtime();
