@@ -38,8 +38,9 @@ int main(int argc, char *argv[]) {
         double bandwidth = total_bytes / total_time / 1e6; // MB/s
         double latency = (total_time / ITER) / 2 * 1e6; // microseconds
         
+		// print the column header	
         if (rank == 0) {
-            printf("Message Size: %d bytes, Bandwidth: %.3f MB/s, Latency: %.3f us\n", msg_size, bandwidth, latency);
+            printf("%d, %f, %f\n", msg_size, bandwidth, latency);
         }
 
         free(message);
