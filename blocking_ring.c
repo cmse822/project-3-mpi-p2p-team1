@@ -2,8 +2,8 @@
 #include <stdlib.h>
 #include <mpi.h>
 
-#define ITER 100 // Define the number of iterations for statistical significance
-#define MAX_MSG_SIZE 4096 // Maximum message size
+#define ITER 100 
+#define MAX_MSG_SIZE 4096
 
 int main(int argc, char *argv[]) {
     MPI_Init(&argc, &argv);
@@ -11,7 +11,6 @@ int main(int argc, char *argv[]) {
     MPI_Comm_rank(MPI_COMM_WORLD, &rank);
     MPI_Comm_size(MPI_COMM_WORLD, &tasks);
 
-    // Determine neighbors in the ring
     int right_neighbor_rank = (rank + 1) % tasks;
     int left_neighbor_rank = rank - 1;
     if (left_neighbor_rank < 0) left_neighbor_rank = tasks - 1;
@@ -28,12 +27,9 @@ int main(int argc, char *argv[]) {
         double start_time = MPI_Wtime();
 
         for (int i = 0; i < ITER; i++) {
-            // Perform the send and receive operations
             MPI_Sendrecv(send_message, msg_size, MPI_CHAR, right_neighbor_rank, 0,
                          recv_message, msg_size, MPI_CHAR, left_neighbor_rank, 0,
                          MPI_COMM_WORLD, MPI_STATUS_IGNORE);
-
-            // Here, you can manipulate the received data if needed
         }
 
         double end_time = MPI_Wtime();
