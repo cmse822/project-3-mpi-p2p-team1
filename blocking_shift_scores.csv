@@ -1,0 +1,12 @@
+Message Size: 2 bytes, Bandwidth: 14.556 MB/s, Latency: 0.137 us
+Message Size: 4 bytes, Bandwidth: 31.397 MB/s, Latency: 0.127 us
+Message Size: 8 bytes, Bandwidth: 65.306 MB/s, Latency: 0.122 us
+Message Size: 16 bytes, Bandwidth: 122.137 MB/s, Latency: 0.131 us
+Message Size: 32 bytes, Bandwidth: 213.120 MB/s, Latency: 0.150 us
+Message Size: 64 bytes, Bandwidth: 377.358 MB/s, Latency: 0.170 us
+Message Size: 128 bytes, Bandwidth: 762.586 MB/s, Latency: 0.168 us
+Message Size: 256 bytes, Bandwidth: 1347.723 MB/s, Latency: 0.190 us
+Message Size: 512 bytes, Bandwidth: 1003.135 MB/s, Latency: 0.510 us
+Message Size: 1024 bytes, Bandwidth: 1726.085 MB/s, Latency: 0.593 us
+Message Size: 2048 bytes, Bandwidth: 3248.473 MB/s, Latency: 0.630 us
+Message Size: 4096 bytes, Bandwidth: 2723.042 MB/s, Latency: 1.504 us

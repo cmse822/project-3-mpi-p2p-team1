@@ -2,8 +2,8 @@
 #include <stdlib.h>
 #include <mpi.h>
 
-#define ITER 100 
-#define MAX_MSG_SIZE 4096
+#define MAX_MSG_SIZE 4096 // Maximum message size in bytes
+#define ITER 10000 // Number of iterations for averaging
 
 int main(int argc, char *argv[]) {
     MPI_Init(&argc, &argv);
@@ -11,36 +11,41 @@ int main(int argc, char *argv[]) {
     MPI_Comm_rank(MPI_COMM_WORLD, &rank);
     MPI_Comm_size(MPI_COMM_WORLD, &tasks);
 
-    int right_neighbor_rank = (rank + 1) % tasks;
-    int left_neighbor_rank = rank - 1;
-    if (left_neighbor_rank < 0) left_neighbor_rank = tasks - 1;
-
+    // Ensure an arbitrary number of processes can be used, potentially adjusted for your specific cluster setup
     for (int msg_size = 2; msg_size <= MAX_MSG_SIZE; msg_size *= 2) {
-        char *send_message = (char *)malloc(msg_size);
-        char *recv_message = (char *)malloc(msg_size);
-
-        if (!send_message || !recv_message) {
-            fprintf(stderr, "Memory allocation failed for message size %d bytes.\n", msg_size);
+        char *message = (char *)malloc(msg_size);
+        if (!message) {
+            fprintf(stderr, "Failed to allocate memory for message size %d bytes.\n", msg_size);
             MPI_Abort(MPI_COMM_WORLD, 1);
+        }
+
+        // Initialize message for sending
+        for (int i = 0; i < msg_size; ++i) {
+            message[i] = rank;
         }
 
         double start_time = MPI_Wtime();
 
-        for (int i = 0; i < ITER; i++) {
-            MPI_Sendrecv(send_message, msg_size, MPI_CHAR, right_neighbor_rank, 0,
-                         recv_message, msg_size, MPI_CHAR, left_neighbor_rank, 0,
-                         MPI_COMM_WORLD, MPI_STATUS_IGNORE);
+        for (int i = 0; i < ITER; ++i) {
+            int next = (rank + 1) % tasks;
+            int prev = (rank - 1 + tasks) % tasks;
+
+            MPI_Sendrecv_replace(message, msg_size, MPI_CHAR, next, 0, prev, 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
         }
 
         double end_time = MPI_Wtime();
+        double total_time = end_time - start_time;
 
+        // Compute bandwidth and latency
+        double total_bytes = (double)msg_size * ITER * 2; // Total bytes sent and received
+        double bandwidth = total_bytes / total_time / 1e6; // MB/s
+        double latency = (total_time / ITER) / 2 * 1e6; // microseconds
+        
         if (rank == 0) {
-            double elapsed_time = end_time - start_time;
-            printf("Message size: %d bytes, Total time for %d iterations: %.3f seconds\n", msg_size, ITER, elapsed_time);
+            printf("Message Size: %d bytes, Bandwidth: %.3f MB/s, Latency: %.3f us\n", msg_size, bandwidth, latency);
         }
 
-        free(send_message);
-        free(recv_message);
+        free(message);
     }
 
     MPI_Finalize();
