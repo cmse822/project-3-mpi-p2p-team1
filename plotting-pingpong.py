@@ -1,5 +1,6 @@
 import pandas as pd
 import matplotlib.pyplot as plt
+import matplotlib.ticker as ticker
 
 # Read data from the CSV file
 filename = '/Users/shelton/Desktop/nbpp.csv'
