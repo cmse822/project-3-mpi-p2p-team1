@@ -4,3 +4,4 @@ nonblock_ping_pong
 blocking_ping_pong
 blocking_ring
 .DS_Store
+./venv/*
