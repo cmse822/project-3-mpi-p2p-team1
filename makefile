@@ -1,6 +1,12 @@
 cc=mpicc
 
-all: blocking_ping_pong nonblock_ping_pong blocking_ring
+all: blocking_ping_pong nonblock_ping_pong blocking_ring nonblocking_ring
+
+nonblocking_ring: nonblocking_ring.o
+	$(cc) nonblocking_ring.o -o nonblocking_ring
+
+nonblocking_ring.o: nonblocking_ring.c
+	$(cc) -c nonblocking_ring.c -o nonblocking_ring.o
 
 blocking_ring: blocking_ring.o
 	$(cc) blocking_ring.o -o blocking_ring
