@@ -8,4 +8,4 @@
 
 module purge
 module load GCC/12.3.0 OpenMPI/5.0.0
-mpiexec -n 2 nonblock_pingpong 
+mpiexec -n 2 nonblock_ping_pong 
