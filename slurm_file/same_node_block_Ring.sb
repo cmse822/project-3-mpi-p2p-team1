@@ -12,4 +12,4 @@ module load GCC/12.3.0 OpenMPI/5.0.0
 
 # AMD20 cluster has 207 nodes, and the capacity of cores for each node is 128 = 2^7
 # we can run n = 2^1, 2^2, ..., 2^7, 2^8
-mpiexec -n 4 blocking_ring > same_node_block_ring.csv
+mpiexec -n 4 block_ring > same_node_block_ring.csv
