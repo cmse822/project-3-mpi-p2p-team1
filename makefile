@@ -1,28 +1,32 @@
 cc=mpicc
 
-all: blocking_ping_pong nonblock_ping_pong blocking_ring nonblocking_ring
+all: block_ping_pong nonblock_ping_pong block_ring nonblock_ring
 
-nonblocking_ring: nonblocking_ring.o
-	$(cc) nonblocking_ring.o -o nonblocking_ring
+# Non-block Ring
+nonblock_ring: nonblock_ring.o
+	$(cc) nonblock_ring.o -o nonblock_ring
 
-nonblocking_ring.o: nonblocking_ring.c
-	$(cc) -c nonblocking_ring.c -o nonblocking_ring.o
+nonblock_ring.o: nonblock_ring.c
+	$(cc) -c nonblock_ring.c -o nonblock_ring.o
 
-blocking_ring: blocking_ring.o
-	$(cc) blocking_ring.o -o blocking_ring
+# Block Ring
+block_ring: block_ring.o
+	$(cc) block_ring.o -o block_ring
 
-blocking_ring.o: blocking_ring.c
-	$(cc) -c blocking_ring.c -o blocking_ring.o
+block_ring.o: block_ring.c
+	$(cc) -c block_ring.c -o block_ring.o
 
+# Non-block Pingpong
 nonblock_ping_pong: nonblock_ping_pong.o
 	$(cc) nonblock_ping_pong.o -o nonblock_ping_pong
 
 nonblock_ping_pong.o: nonblock_ping_pong.c
 	$(cc) -c nonblock_ping_pong.c -o nonblock_ping_pong.o
 
-blocking_ping_pong: blocking_ping_pong.o
-	$(cc) blocking_ping_pong.o -o blocking_ping_pong
+# Block Pingpong
+block_ping_pong: block_ping_pong.o
+	$(cc) block_ping_pong.o -o block_ping_pong
 
-blocking_ping_pong.o: blocking_ping_pong.c
-	$(cc) -c blocking_ping_pong.c -o blocking_ping_pong.o
+block_ping_pong.o: block_ping_pong.c
+	$(cc) -c block_ping_pong.c -o block_ping_pong.o
 
