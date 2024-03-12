@@ -1,0 +1,11 @@
+#!/bin/bash
+
+#SBATCH --nodes=2
+#SBATCH --ntasks-per-node=1
+#SBATCH --job-name diff_node_block_ping_pong
+#SBATCH --output=%x_%j.out
+#SBATCH --error=%x_%j.err
+
+module purge
+module load GCC/12.3.0 OpenMPI/5.0.0
+mpiexec -n 2 block_ping_pong > diff_node_block_ping_pong.csv
