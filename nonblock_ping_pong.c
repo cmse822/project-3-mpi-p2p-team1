@@ -45,30 +45,25 @@ int main(int argc, char* argv[]) {
             MPI_Barrier(MPI_COMM_WORLD);
 
             if (rank == 0) {
-
                 double startTime = MPI_Wtime();
-                
-                MPI_Irecv(msg, msgSize, MPI_CHAR, 1, 0, MPI_COMM_WORLD, &requestRecv);
                 MPI_Isend(msg, msgSize, MPI_CHAR, 1, 0, MPI_COMM_WORLD, &requestSend);
-                MPI_Wait(&requestRecv, &status);
                 MPI_Wait(&requestSend, &status);
-
+                MPI_Irecv(msg, msgSize, MPI_CHAR, 1, 0, MPI_COMM_WORLD, &requestRecv);
+                MPI_Wait(&requestRecv, &status);
+                
                 double endTime = MPI_Wtime();
-
                 totalTime += endTime - startTime; // sec
 
             } else if (rank == 1) {
-
                 MPI_Irecv(msg, msgSize, MPI_CHAR, 0, 0, MPI_COMM_WORLD, &requestRecv);
-                MPI_Isend(msg, msgSize, MPI_CHAR, 0, 0, MPI_COMM_WORLD, &requestSend);
                 MPI_Wait(&requestRecv, &status);
+                MPI_Isend(msg, msgSize, MPI_CHAR, 0, 0, MPI_COMM_WORLD, &requestSend);
                 MPI_Wait(&requestSend, &status);
             }
 
         }
 
         if (rank == 0) {
-
             double avgTime = totalTime / ITER * 1e6; // us
             double bandwidth = (msgSize * 2 * ITER) / totalTime / 1e6; // Megabytes/s
             double latency = avgTime / 2.0; // us
