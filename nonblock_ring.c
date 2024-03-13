@@ -13,7 +13,11 @@ int main(int argc, char *argv[]) {
 
     MPI_Request requestSend, requestRecv;
     MPI_Status statusSend, statusRecv;
-
+    
+    if (rank == 0) {
+        printf("Message Size(bytes), Bandwidth(Megabytes/s), Latency(us)\n");
+    }
+    
     for (int msg_size = 2; msg_size <= MAX_MSG_SIZE; msg_size *= 2) {
         char *send_message = (char *)malloc(msg_size);
         char *recv_message = (char *)malloc(msg_size);
