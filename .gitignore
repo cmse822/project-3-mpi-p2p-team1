@@ -9,3 +9,4 @@ nonblocking_ring
 nonblock_ring
 .DS_Store
 ./venv/*
+.ipynb_checkpoints/
