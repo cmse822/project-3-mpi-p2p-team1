@@ -7,5 +7,6 @@
 #SBATCH --error=%x_%j.err
 
 module purge
-module load GCC/12.3.0 OpenMPI/5.0.0
+#module load GCC/12.3.0 OpenMPI/5.0.0
+module load GCC/6.4.0 OpenMPI/2.1.2
 mpiexec -n 2 block_ping_pong > same_node_block_ping_pong.csv
