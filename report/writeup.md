@@ -29,7 +29,7 @@ The latency also exhibits similar changes. The overall latency is significantly 
 
 <img src="blocking_ring_bandwidth_latency.png" alt="error" width="800"/>
 
-The `amd-20` cluster is limited to 148 cores per node, and so the $2^8 = 256$ processes cannot fit on one node. The case has the lowest bandwidth and highest latency as a result. The latency of the off-node communcation is suprisingly close to that of the on-node communcation, showing that the network is fast in the nonblocking case. 
+The `amd-20` cluster is limited to 148 cores per node, and so the $2^8 = 256$ processes cannot fit on one node. The case has the lowest bandwidth and highest latency as a result. The latency of the off-node communcation is suprisingly close to that of the on-node communcation, showing that the network is fast in the nonblocking case. The case of two processes has the highest bandwidth because those processors are in the same socket.
   
 ## Part 4: Non-blocking MPI Ring Shift
 
