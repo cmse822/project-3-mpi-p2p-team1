@@ -1,0 +1,12 @@
+*.o
+pingpong
+nonblock_ping_pong
+blocking_ping_pong
+block_ping_pong
+blocking_ring
+block_ring
+nonblocking_ring
+nonblock_ring
+.DS_Store
+./venv/*
+.ipynb_checkpoints/

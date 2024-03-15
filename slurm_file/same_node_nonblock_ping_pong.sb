@@ -1,0 +1,12 @@
+#!/bin/bash
+
+#SBATCH --nodes=1
+#SBATCH --ntasks-per-node=2
+#SBATCH --job-name same_node_nonblock_ping_pong
+#SBATCH --output=%x_%j.out
+#SBATCH --error=%x_%j.err
+
+module purge
+#module load GCC/12.3.0 OpenMPI/5.0.0
+module load GCC/6.4.0 OpenMPI/2.1.2
+mpiexec -n 2 nonblock_ping_pong > same_node_nonblock_ping_pong.csv
